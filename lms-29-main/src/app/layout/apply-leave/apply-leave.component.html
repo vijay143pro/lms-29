@@ -1,0 +1,172 @@
+<header style="display: inline-flex;">
+  <h3>Apply Leave</h3>  
+</header>
+
+<section>
+  <form [formGroup]="emailForm" class="responsive-form">
+    <div>
+      <mat-form-field class="formInput">
+        <mat-label>To</mat-label>
+        <input  matInput formControlName="mySearch" />
+        <mat-select formControlName="toppings1" multiple>
+        
+          <mat-option *ngFor="let topping of toppingList | filter: emailForm.get('mySearch')?.value" [value]="topping">{{topping}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-error *ngIf="emailForm.get('toppings1')?.invalid && emailForm.get('toppings1')?.touched " >
+        Please select at least one option.
+      </mat-error>
+      
+    <div class="to_contained_topping">
+      <p *ngFor="let top of emailForm.get('toppings1')?.value">
+        {{ top }}
+        <span (click)="delete(top)">
+          <mat-icon>close</mat-icon>
+        </span>
+      </p>      
+    </div>
+    </div><br/>
+    <div>
+      <div [ngClass]="{'has-error': emailForm.get('toppings2')?.invalid && emailForm.get('toppings2')?.touched}">
+        <mat-form-field class="formInput">
+          <mat-label>Cc</mat-label>
+          <mat-select formControlName="toppings2" multiple>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="emailForm.get('toppings2')?.invalid && emailForm.get('toppings2')?.touched">
+          Please select at least one option.
+        </mat-error>
+      </div>
+      
+      
+      <div class="ccValues">
+        <p class="contained_cc_value" *ngIf="nameArray.includes('Giridharan V') || nameArray.includes('V Krishna Kumar')">{{ giri }}</p>
+        <p class="contained_cc_value" *ngIf="nameArray.includes('V Krishna Kumar')">{{ krish }}</p>
+        <div class="to_contained_topping">
+          <p *ngFor="let top of emailForm.get('toppings2')?.value">
+            {{ top }}
+            <span (click)="del(top)">
+              <mat-icon>close</mat-icon>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div><br/>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave type</mat-label>
+        <input type="text" matInput [formControl]=" myControl" [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="emailForm.get('myControl')?.invalid && emailForm.get('myControl')?.touched">
+          Leave type is required.
+        </mat-error>
+      </mat-form-field>
+ 
+    </div><br/>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Duration</mat-label>
+        <input type="text" matInput [formControl]="myDurationControl" [matAutocomplete]="durationAuto" style="width: 300px;">
+        <mat-autocomplete #durationAuto="matAutocomplete" [displayWith]="durationDisplayFn">
+          <mat-option *ngFor="let option of durationFilteredOptions | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    
+   <div class="range_container" *ngIf="durationDateName == 'more than oneday'; else default">
+    <mat-form-field class="example-form-field">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="rangePicker">
+        <input matStartDate placeholder="Start date" (dateChange)="onStartDateChange($event)">
+        <input matEndDate placeholder="End date" (dateChange)="onEndDateChange($event)">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #rangePicker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply > Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
+   
+    <div style="margin-left: 200px;">
+      <p>from: {{ selectedFrom | date:'mediumDate' }}</p>
+      <p>To: {{ selectedTo | date:'mediumDate' }}</p>
+    </div>
+   </div>
+   <ng-template #default>
+    <mat-card class="demo-inline-calendar" >
+      <div class="calendar-content">
+        <mat-calendar  [(selected)]="selected" class="small-calendar"></mat-calendar>
+        <p>
+          Selected date: {{ getFormattedDate() }}
+        </p><br/>
+      </div>
+    </mat-card> 
+   </ng-template>
+
+  
+
+   <div *ngIf="selected">
+    <mat-card>
+      <mat-card-content>
+        <mat-radio-group aria-label="Select an option">
+          <p> <mat-radio-button value="1">Half day</mat-radio-button></p>
+           <p><mat-radio-button value="2">Full day</mat-radio-button></p>
+         </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+    </div>
+    
+    
+    
+      <div *ngIf="selectedFrom && selectedTo">
+        <div *ngFor="let date of getDateRangeArray(selectedFrom, selectedTo)">
+          <mat-card style="margin-bottom: 50px; margin-top: 10px;">
+            {{ date | date:'mediumDate' }}
+            <mat-card-content>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1" (change)="onRadioSelectionChange(date, 'Half day')"
+                  [checked]="dateRadioSelections[date.toISOString()] === 'Half day'">Half day</mat-radio-button>
+                <mat-radio-button value="2" (change)="onRadioSelectionChange(date, 'Full day')"
+                  [checked]="dateRadioSelections[date.toISOString()] === 'Full day'">Full day</mat-radio-button>
+              </mat-radio-group>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <mat-form-field class="formInput">
+        <mat-label>Reason</mat-label>
+        <textarea matInput formControlName="reason" class="reason" rows="4" cols="40"></textarea>
+        <mat-error *ngIf="emailForm.get('reason')?.invalid && emailForm.get('reason')?.touched">
+          Reason is required
+        </mat-error>
+      </mat-form-field>
+ 
+    
+ <div class="submit-button">
+  <button type="button" (click)="submitForm()" class="submitLeave">Send Email</button>
+</div>
+
+
+  </form>
+</section>
+
+
+
+
+
+
+
+
+          
+
+

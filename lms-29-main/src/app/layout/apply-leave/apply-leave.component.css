@@ -1,0 +1,176 @@
+
+  .example-full-width{
+    width: 500px;
+  }
+  .formInput{
+    width: 500px;
+
+  }
+  .to_div input{
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  .cc_div input{
+    width: 500px;
+    height: 50px;
+   
+  }
+  .range_container{
+    display: flex;
+  }
+  .toValues{
+    flex-wrap: wrap;
+    display: flex;
+  }
+  .to_contained_values{
+    padding: 10px;
+    margin-left: 10px;
+    background-color: rgb(123, 195, 228);
+    border-radius: 50px;
+    box-shadow:2px 1px rgba(0,0,0,0.5) ;
+  }
+  .ccValues{
+    display: flex;
+    flex-wrap: wrap
+  }
+  .contained_cc_value {
+    padding: 10px;
+    margin-left: 10px;
+    background-color: rgb(123, 195, 228);
+    border-radius: 50px;
+    box-shadow:2px 1px rgba(0,0,0,0.5) ;
+  }
+
+  
+
+  .to_contained_topping{
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+ 
+  .to_contained_topping p{
+    padding: 10px;
+    margin-left: 10px;
+    background-color: rgb(123, 195, 228);
+    border-radius: 50px;
+    box-shadow:2px 1px rgba(0,0,0,0.5) ;
+  }
+
+  .demo-inline-calendar {
+    margin-top: 20px;
+    width: 500px;
+    height: 550px;
+    display: flex;
+  }
+  .small-calendar{
+    width: 500px;
+  }
+  
+  
+
+  p {
+    padding-bottom: 10px;
+    margin-left: 10px; 
+  }
+
+  section{
+    
+    margin-left: 50px;
+  }
+  .calendar-content{
+    display: flex;
+    padding-bottom: 20px;
+  }
+  .demo-inline-calendar{
+    width: 500px;
+  }
+  
+  
+  @media (max-width: 480px) {
+    .responsive-form {
+      display: block;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+
+    .example-full-width{
+      width: 120px;
+    }
+    .formInput{
+      width: 300px;
+      margin-left: 0px;
+  
+    }
+    section{
+      margin-left: 10px;
+  
+    }
+
+    
+    .demo-inline-calendar {
+      width: 300px; /* Adjust the calendar width as needed */
+      height: 300px;
+    }
+  
+    .calendar-content {
+      display: block;
+      width: 100%;
+    }
+
+  }
+
+
+
+  /* Media query for screens with width 720px and below */
+@media (max-width: 720px) {
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    margin: 10px 0px 0px 100px;
+  }
+
+  header h3 {
+    margin: 0; /* Remove default margin for <h3> */
+  }
+
+  .submit-button {
+    margin: 10px 0; /* Adjust the margin as needed */
+    text-align: center; /* Center-align the button */
+  }
+  .demo-inline-calendar{
+    height: auto;
+  display: block;
+}
+.calendar-content{
+  display: block;
+  
+}
+.calendar-content p{
+  padding-top: 10px;
+  margin-bottom: 20px;
+  
+}
+.small-calendar{
+  width: 300px;
+}
+  .example-full-width{
+    width: 300px;
+    height: auto;
+    
+  }
+  .range_container{
+    display: block;
+  }
+
+  .to_contained_topping{
+    display: block;
+    width: 100% ;
+  }
+
+ 
+}

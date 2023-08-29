@@ -1,0 +1,53 @@
+
+.sidebar{
+    width: 250px;
+}
+.ah-sidebar a{
+   color: gray;
+   text-decoration: none;
+    
+}
+.items{
+    padding: 25px;
+}
+
+  .icon-space{
+    padding-left: 1px;
+  }
+  .side_ic{
+    padding-right: 50px;
+  }
+   .side_icc{
+    margin-right: 30px;
+  }
+  .items{
+    padding: 30px 10px;
+  }
+
+  .ah-sidebar a:hover{
+    color: rgb(92, 134, 211);
+  }
+/* Add CSS styles for the hamburger menu and sidebar */
+.hamburger {
+  display: none; /* Hide the hamburger button by default */
+}
+
+.sidebar-container {
+  /* Your existing sidebar styles */
+}
+
+/* Media query for screens with width 720px and below */
+@media (max-width: 720px) {
+  .hamburger {
+    display: block; /* Show the hamburger button */
+  }
+
+  .sidebar-container {
+    display: none; /* Hide the sidebar by default */
+  }
+
+  /* Show the sidebar when the showSidebar flag is true */
+  .show-sidebar {
+    display: block !important;
+  }
+}
